@@ -39,7 +39,10 @@ Minimalistic uptime server in Elixir with HTTP API and WebSocket SPA status page
 ```elixir
 $ mix deps.get
 $ iex -S mix
-UPTIME/STATUS server listening at port: 5010.
+UP UPTIME/STATUS version 1.0.
+1: HTTP API listening at port: 5010.
+2: WebSocket NITRO listening at port: 5011.
+Interactive Elixir (1.12.2) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)> 
 ```
 
