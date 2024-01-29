@@ -1,7 +1,7 @@
 import Config
 
 config :n2o,
-  routes: UP.Route,
+  routes: UP.WS,
   pickler: :n2o_secret,
   mq: :n2o_syn,
   rest: 5010,

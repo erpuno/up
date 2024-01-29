@@ -3,7 +3,7 @@ defmodule UP.Application do
   def rest, do: Application.get_env(:n2o, :rest, 5010)
   def ws, do: Application.get_env(:n2o, :ws, 5011)
   def start(_, _) do
-      children = [ { Plug.Cowboy, scheme: :http, plug: UP.Endpoint, options: [port: rest()] } ]
+      children = [ { Plug.Cowboy, scheme: :http, plug: UP.HTTP, options: [port: rest()] } ]
       opts = [strategy: :one_for_one, name: App.Supervisor]
       :cowboy.start_clear(:http, [{:port, ws()}], %{env: %{dispatch: Application.get_env(:n2o, :points, [])}})
       :io.format "UP UPTIME/STATUS version 1.0.~n"
