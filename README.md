@@ -2,9 +2,7 @@
 
 [![Hex pm](http://img.shields.io/hexpm/v/up.svg?style=flat&x=1)](https://hex.pm/packages/up)
 
-Minimalistic uptime server in Elixir with HTTP API and WebSocket SPA status page.
-
-![image](https://github.com/erpuno/up/assets/144776/50a090c7-4ff0-4b9f-8a40-de32f750f06f)
+Minimalistic uptime server in Elixir with HTTP API and WebSocket SPA status page. See https://up.erp.uno.
 
 ```elixir
   get "/"
