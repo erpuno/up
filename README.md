@@ -1,4 +1,4 @@
-# UP: Uptime/Status Incident and Maintenance Management
+# UP: Incidents and Maintenance
 
 [![Hex pm](http://img.shields.io/hexpm/v/up.svg?style=flat&x=1)](https://hex.pm/packages/up)
 
