@@ -31,8 +31,9 @@ Minimalistic uptime server in Elixir with HTTP API and WebSocket SPA status page
 ## Features
 
 * Incidents reporting
-* Maintenance reporting
-* Components/Groups taxonomy management
+* Maintenance announcing
+* Components management
+* Telemetry
 
 ### Setup
 
