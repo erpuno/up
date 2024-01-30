@@ -341,7 +341,7 @@
         "tags": [
           "Users"
         ]
-      },
+      }
     },
     "/users/{id}": {
       "get": {
