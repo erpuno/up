@@ -1,0 +1,471 @@
+{
+  "definitions": {
+    "ComponentsDefinition": {
+      "description": "A System Component of the UP Status Page",
+      "example": {
+        "email": "master@5HT.co",
+        "id": 123,
+        "name": "5HT"
+      },
+      "properties": {
+        "email": {
+          "description": "Email address",
+          "format": "email",
+          "type": "string"
+        },
+        "id": {
+          "description": "User ID",
+          "type": "integer"
+        },
+        "inserted_at": {
+          "description": "Creation timestamp",
+          "format": "datetime",
+          "type": "string"
+        },
+        "name": {
+          "description": "User name",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "Update timestamp",
+          "format": "datetime",
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "name"
+      ],
+      "title": "ComponentDefinition",
+      "type": "object"
+    },
+    "Component": {
+      "description": "POST body for creating a System Component",
+      "properties": {
+        "component": {
+          "$ref": "#/definitions/Component",
+          "description": "The user details"
+        }
+      },
+      "title": "Component",
+      "type": "object"
+    },
+    "Components": {
+      "description": "Response schema for multiple users",
+      "properties": {
+        "data": {
+          "description": "The users details",
+          "items": {
+            "$ref": "#/definitions/Components"
+          },
+          "type": "array"
+        }
+      },
+      "title": "Components",
+      "type": "object"
+    },
+    "UsersDefinition": {
+      "description": "A user of the app",
+      "example": {
+        "email": "master@5HT.co",
+        "id": 123,
+        "name": "5HT"
+      },
+      "properties": {
+        "email": {
+          "description": "Email address",
+          "format": "email",
+          "type": "string"
+        },
+        "id": {
+          "description": "User ID",
+          "type": "integer"
+        },
+        "inserted_at": {
+          "description": "Creation timestamp",
+          "format": "datetime",
+          "type": "string"
+        },
+        "name": {
+          "description": "User name",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "Update timestamp",
+          "format": "datetime",
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "name"
+      ],
+      "title": "UserDefinition",
+      "type": "object"
+    },
+    "User": {
+      "description": "Response schema for single user",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/User",
+          "description": "The user details"
+        }
+      },
+      "title": "User",
+      "type": "object"
+    },
+    "Users": {
+      "description": "Response schema for multiple users",
+      "properties": {
+        "data": {
+          "description": "The users details",
+          "items": {
+            "$ref": "#/definitions/User"
+          },
+          "type": "array"
+        }
+      },
+      "title": "Users",
+      "type": "object"
+    }
+  },
+  "info": {
+    "title": "UP.ERP.UNO",
+    "version": "1.0"
+  },
+  "paths": {
+    "/components": {
+      "get": {
+        "deprecated": false,
+        "description": "List all system components in the database",
+        "operationId": "SimpleWeb.UserController.index",
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": [
+                  {
+                    "email": "5HT6@mail.com",
+                    "id": 1,
+                    "inserted_at": "2017-02-08T12:34:55Z",
+                    "name": "5HT",
+                    "updated_at": "2017-02-12T13:45:23Z"
+                  },
+                  {
+                    "email": "Jack7@mail.com",
+                    "id": 2,
+                    "inserted_at": "2017-02-04T11:24:45Z",
+                    "name": "Jack",
+                    "updated_at": "2017-02-15T23:15:43Z"
+                  }
+                ]
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Component"
+            }
+          }
+        },
+        "summary": "List System Components",
+        "tags": [
+          "Components"
+        ]
+      },
+    },
+    "/components/{id}": {
+      "get": {
+        "description": "Show a system component by ID",
+        "operationId": "SimpleWeb.UserController.show",
+        "parameters": [
+          {
+            "description": "Component ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "x-example": 123
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "email": "5HT3@mail.com",
+                  "id": 123,
+                  "inserted_at": "2017-02-08T12:34:55Z",
+                  "name": "5HT",
+                  "updated_at": "2017-02-12T13:45:23Z"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Component"
+            }
+          }
+        },
+        "summary": "Show User",
+        "tags": [
+          "Components"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Update all attributes of a system component",
+        "operationId": "SimpleWeb.UserController.update",
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "x-example": 3
+          },
+          {
+            "description": "The user details",
+            "in": "body",
+            "name": "user",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Component"
+            },
+            "x-example": {
+              "user": {
+                "email": "5HT4@mail.com",
+                "name": "5HT"
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Successfully",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "email": "5HT5@mail.com",
+                  "id": 3,
+                  "inserted_at": "2017-02-08T12:34:55Z",
+                  "name": "5HT",
+                  "updated_at": "2017-02-12T13:45:23Z"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Component"
+            }
+          }
+        },
+        "summary": "Update or Create System Component",
+        "tags": [
+          "Components"
+        ]
+      },
+      "delete": {
+        "description": "Delete a system component by ID",
+        "operationId": "SimpleWeb.UserController.delete",
+        "parameters": [
+          {
+            "description": "Component ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "x-example": 3
+          }
+        ],
+        "responses": {
+          "203": {
+            "description": "No Content - Deleted Successfully"
+          }
+        },
+        "summary": "Delete System Component",
+        "tags": [
+          "Components"
+        ]
+      },
+    },
+    "/users": {
+      "get": {
+        "deprecated": false,
+        "description": "List all users in the database",
+        "operationId": "SimpleWeb.UserController.index",
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": [
+                  {
+                    "email": "5HT6@mail.com",
+                    "id": 1,
+                    "inserted_at": "2017-02-08T12:34:55Z",
+                    "name": "5HT",
+                    "updated_at": "2017-02-12T13:45:23Z"
+                  },
+                  {
+                    "email": "Jack7@mail.com",
+                    "id": 2,
+                    "inserted_at": "2017-02-04T11:24:45Z",
+                    "name": "Jack",
+                    "updated_at": "2017-02-15T23:15:43Z"
+                  }
+                ]
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UsersResponse"
+            }
+          }
+        },
+        "summary": "List Users",
+        "tags": [
+          "Users"
+        ]
+      },
+    },
+    "/users/{id}": {
+      "get": {
+        "description": "Show a User by ID",
+        "operationId": "SimpleWeb.UserController.show",
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "x-example": 123
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "email": "5HT3@mail.com",
+                  "id": 123,
+                  "inserted_at": "2017-02-08T12:34:55Z",
+                  "name": "5HT",
+                  "updated_at": "2017-02-12T13:45:23Z"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          }
+        },
+        "summary": "Show User",
+        "tags": [
+          "Users"
+        ]
+      },
+      "delete": {
+        "description": "Delete a User by ID",
+        "operationId": "SimpleWeb.UserController.delete",
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "x-example": 3
+          }
+        ],
+        "responses": {
+          "203": {
+            "description": "No Content - Deleted Successfully"
+          }
+        },
+        "summary": "Delete User",
+        "tags": [
+          "Users"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Update all attributes of a user",
+        "operationId": "SimpleWeb.UserController.update",
+        "parameters": [
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "x-example": 3
+          },
+          {
+            "description": "The user details",
+            "in": "body",
+            "name": "user",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UserRequest"
+            },
+            "x-example": {
+              "user": {
+                "email": "5HT4@mail.com",
+                "name": "5HT"
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated Successfully",
+            "examples": {
+              "application/json": {
+                "data": {
+                  "email": "5HT5@mail.com",
+                  "id": 3,
+                  "inserted_at": "2017-02-08T12:34:55Z",
+                  "name": "5HT",
+                  "updated_at": "2017-02-12T13:45:23Z"
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          }
+        },
+        "summary": "Update or Create User",
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+  },
+  "swagger": "2.0"
+}
