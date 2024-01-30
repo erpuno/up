@@ -175,7 +175,7 @@
         "tags": [
           "Components"
         ]
-      },
+      }
     },
     "/components/{id}": {
       "get": {
@@ -465,7 +465,7 @@
           "Users"
         ]
       }
-    },
+    }
   },
   "swagger": "2.0"
 }
