@@ -298,7 +298,7 @@
         "tags": [
           "Components"
         ]
-      },
+      }
     },
     "/users": {
       "get": {
