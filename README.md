@@ -1,3 +1,9 @@
+# Webhook Integration for Status Monitoring
+
+## Overview
+
+This repository provides a webhook integration for receiving updates related to incidents, maintenances, and component status changes. The integration supports different events associated with a status page.
+
 # UP: Incidents and Maintenance
 
 [![Hex pm](http://img.shields.io/hexpm/v/up.svg?style=flat&x=1)](https://hex.pm/packages/up)
@@ -45,6 +51,143 @@ Interactive Elixir (1.12.2) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)>
 ```
 
-## Credits
 
-* Namdak Tonpa
+## Webhook Formats
+
+### Incident Updates
+
+```json
+{
+  "meta": {
+    "unsubscribe": "",
+    "documentation": ""
+  },
+  "page": {
+    "id": "",
+    "status_indicator": "",
+    "status_description": "",
+    "url": ""
+  },
+  "incident": {
+    "backfilled": false,
+    "created_at": "",
+    "impact": "",
+    "name": "",
+    "resolved_at": "",
+    "status": "",
+    "updated_at": "",
+    "id": "",
+    "url": "",
+    "incident_updates": [{
+      "id": "",
+      "incident_id": "",
+      "body": "",
+      "status": "",
+      "created_at": "",
+      "updated_at": ""
+    }]
+  }
+}
+```
+Maintenance Updates
+```json
+{
+  "meta": {
+    "unsubscribe": "",
+    "documentation": ""
+  },
+  "page": {
+    "id": "",
+    "status_indicator": "",
+    "status_description": "",
+    "url": ""
+  },
+  "maintenance": {
+    "backfilled": false,
+    "created_at": "",
+    "impact": "",
+    "name": "",
+    "resolved_at": "",
+    "status": "",
+    "updated_at": "",
+    "id": "",
+    "url": "",
+    "duration": "",
+    "maintenance_updates": [{
+      "id": "",
+      "maintenance_id": "",
+      "body": "",
+      "status": "",
+      "created_at": "",
+      "updated_at": ""
+    }]
+  }
+}
+```
+
+Component Updates
+```json
+
+{
+  "meta": {
+    "unsubscribe": "",
+    "documentation": ""
+  },
+  "page": {
+    "id": "",
+    "status_indicator": "",
+    "status_description": "",
+    "url": ""
+  },
+  "component_update": {
+    "created_at": "",
+    "new_status": "",
+    "component_id": ""
+  },
+  "component": {
+    "created_at": "",
+    "id": "",
+    "name": "",
+    "status": ""
+  }
+}
+```
+
+### Status Page and Component Statuses
+## Page Statuses:
+
+```
+UP
+HASISSUES
+UNDER MAINTENANCE
+```
+
+# Component Statuses:
+```
+OPERATIONAL
+UNDERMAINTENANCE
+DEGRADEDPERFORMANCE
+PARTIALOUTAGE
+MAJOROUTAGE
+```
+# Incident Statuses:
+```
+INVESTIGATING
+IDENTIFIED
+MONITORING
+RESOLVED
+```
+# Maintenance Statuses:
+```
+NOTSTARTEDYET
+INPROGRESS
+COMPLETED
+```
+Usage
+Subscribe to webhooks using the provided formats.
+Receive updates for incidents, maintenances, and component status changes.
+Use the provided status page and component statuses to monitor and act accordingly.
+
+
+
+
