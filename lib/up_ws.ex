@@ -6,5 +6,5 @@ defmodule UP.WS do
       {:ok, state, N2O.cx(context, path: path, module: __MODULE__)}
   end
   def event(:init), do: :io.format 'NITRO INIT~n'
-  def event(x),     do: :io.format 'MESSAGE ~p~n', [x] # > direct(tuple(atom('ok'),number(2)))
+  def event(x), do: (:io.format 'MESSAGE ~p~n', [x]) # > direct(tuple(atom('ok'),number(2)))
 end

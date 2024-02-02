@@ -22,8 +22,8 @@ defmodule UP.HTTP do
                                     "for information about endpoints addresses.") end
 
    def encode(x) do
-       case  Jason.encode(x) do 
-             {:ok, bin} -> bin <> "\n" 
+       case  Jason.encode(x) do
+             {:ok, bin} -> bin <> "\n"
              _ -> "ERROR" <> "\n"
        end |> Jason.Formatter.pretty_print
    end
