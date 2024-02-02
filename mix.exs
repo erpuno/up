@@ -20,7 +20,7 @@ defmodule UP.Mixfile do
   end
 
   def application do
-    [ extra_applications: [:logger, :plug_cowboy, :jason],
+    [ extra_applications: [:logger, :plug_cowboy, :jason, :inets],
       mod: {UP.Application,[]}
     ]
   end

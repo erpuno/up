@@ -1,5 +1,8 @@
 import Config
 
+config :up,
+  instatus: 'Bearer xxx'
+
 config :n2o,
   routes: UP.WS,
   pickler: :n2o_secret,
