@@ -129,6 +129,19 @@ $ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/subscriptio
 ]
 ```
 
+### Component Management
+
+```
+$ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/component/maxim-0012"
+[
+  {
+    "result": [],
+    "spec": "get",
+    "type": "component"
+  }
+]
+```
+
 ### Maintenance Managements
 
 ```
