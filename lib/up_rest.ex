@@ -108,7 +108,7 @@ defmodule UP.HTTP do
    # GET PATHWAY
 
    def get3(conn, auth, type, _, spec) when type == "account" do
-       secAdmin = :application.get_env :up, :security_admin, "1707126861546831000"
+       secAdmin = :application.get_env :up, :security_admin, :nitro.to_binary(:kvs.seq([],[]))
        case auth do
             _ when auth == secAdmin ->
                    accounts = :lists.map(fn x -> UP.Serial.fromRecord(x) end, :kvs.all("/#{type}"))
