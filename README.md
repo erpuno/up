@@ -115,7 +115,7 @@ $ curl -H "Auth: secret" -X GET "http://localhost:5010/account"
 ]
 ```
 
-### Site Managements
+### Site Management
 
 ```
 $ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/site/maxim-0012"
@@ -154,7 +154,7 @@ $ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/component/m
 ]
 ```
 
-### Maintenance Managements
+### Maintenance Management
 
 ```
 $ curl -H "Auth: 01707135870515017000" -X GET "http://localhost:5010/maintenance"
