@@ -20,9 +20,12 @@ defmodule UP.Instatus do
       end
   end
 
-  def pages(),            do: reduceGet("/v2/pages",                     "pages",         1, 100, [])
-  def components(page),   do: reduceGet("/v1/#{page}/components",        "components",    1, 100, [])
-  def component(page,id), do: reduceGet("/v1/#{page}/components/#{id}",  "component",     1, 100, [])
+  def pages(),             do: reduceGet("/v2/pages",                     "sites",         1, 100, [])
+  def components(page),    do: reduceGet("/v1/#{page}/components",        "components",    1, 100, [])
+  def component(page,id),  do: reduceGet("/v1/#{page}/components/#{id}",  "component",     1, 100, [])
+  def subscriptions(page), do: reduceGet("/v1/#{page}/subscribers",       "subscriptions", 1, 100, [])
+  def incidents(page),     do: reduceGet("/v1/#{page}/incidents",         "incidents",     1, 100, [])
+  def maintenances(page),  do: reduceGet("/v1/#{page}/maintenances",      "maintenances",  1, 100, [])
 
 end
 
