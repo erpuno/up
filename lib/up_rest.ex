@@ -94,7 +94,8 @@ defmodule UP.HTTP do
                                 "id" => id,
                                 "result" => UP.Serial.fromRecord(newObject),
                                 "spec" => spec }]))
-            _ -> send_resp(conn, 400,
+            _ -> :io.format 'PUT:/#{type} AUTH FAILED: ~p~n', [auth]
+                 send_resp(conn, 400,
                      encode([%{ "error" => "Authorization",
                                 "text" => "Account key doesn't match." }])) end end
 
