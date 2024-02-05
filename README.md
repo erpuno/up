@@ -105,7 +105,7 @@ $ curl -H "Auth: secret" -X GET "http://localhost:5010/account" ; echo
 ### Site Managements
 
 ```
-$ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/sites/maxim-0012" ; echo
+$ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/site/maxim-0012" ; echo
 [
   {
     "result": [],
@@ -118,7 +118,7 @@ $ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/sites/maxim
 ### Subscription Management
 
 ```
-$ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/subscriptions/maxim-0012" ; echo
+$ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/subscription/maxim-0012" ; echo
 [
   {
     "result": [],
