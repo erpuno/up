@@ -6,28 +6,13 @@ defmodule UP.HTTP do
      plug :match
      plug :dispatch
      plug Plug.Parsers, parsers: [:json], json_decoder: Jason
-      get "/"                     do meta(conn) end
-      get "/account"             do get3(conn,auth(conn),"account",[],"lst") end
-      get "/account/:id"         do get3(conn,auth(conn),"account",id,"get") end
-      put "/account/"            do put3(conn,auth(conn),"account",[],"put") end
-      get "/site"                do get3(conn,auth(conn),"site",[],"lst") end
-      get "/site/:id"            do get3(conn,auth(conn),"site",id,"get") end
-      put "/site/:id"            do put3(conn,auth(conn),"site",id,"put") end
-      get "/incident"            do get3(conn,auth(conn),"incident",[],"lst") end
-      get "/incident/:id"        do get3(conn,auth(conn),"incident",id,"get") end
-      put "/incident/:id"        do put3(conn,auth(conn),"incident",id,"put") end
-      get "/metric"              do get3(conn,auth(conn),"metric",[],"lst") end
-      get "/metric/:id"          do get3(conn,auth(conn),"metric",id,"get") end
-      put "/metric/:id"          do put3(conn,auth(conn),"metric",id,"put") end
-      get "/subscription"        do get3(conn,auth(conn),"subscription",[],"lst") end
-      get "/subscription/:id"    do get3(conn,auth(conn),"subscription",id,"get") end
-      put "/subscription/:id"    do put3(conn,auth(conn),"subscription",id,"put") end
-      get "/maintenance"         do get3(conn,auth(conn),"maintenance",[],"lst") end
-      put "/maintenance/:id"     do put3(conn,auth(conn),"maintenance",id,"put") end
-      get "/maintenance/:id"     do get3(conn,auth(conn),"maintenance",id,"get") end
-      get "/component"           do get3(conn,auth(conn),"component",[],"lst") end
-      get "/component/:id"       do get3(conn,auth(conn),"component",id,"get") end
-      put "/component/:id"       do put3(conn,auth(conn),"component",id,"put") end
+      get "/"             do meta(conn) end
+      get "/account"      do get3(conn,auth(conn),"account",[],"lst") end
+      get "/account/:id"  do get3(conn,auth(conn),"account",id,"get") end
+      put "/account/"     do put3(conn,auth(conn),"account",[],"put") end
+      get "/:type"        do get3(conn,auth(conn),type,[],"lst") end
+      get "/:type/:id"    do get3(conn,auth(conn),type,id,"get") end
+      put "/:type/:id"    do put3(conn,auth(conn),type,id,"put") end
     match _ do send_resp(conn, 404, "Please refer to https://up.erp.uno manual " <>
                                     "for information about endpoints addresses.") end
 
@@ -46,11 +31,11 @@ defmodule UP.HTTP do
        conn |> Plug.Conn.put_resp_content_type("application/json") |>
        send_resp(200, encode([%{ "resourceType" => "UP", "methods" => [
           "GET /account", "GET /accounts/:id", "PUT /account",
-          "GET /subscription", "GET /subscription/:id", "PUT /subscription",
-          "GET /incident", "GET /incidents/:id", "PUT /incidents",
-          "GET /maintenance", "GET /maintenance/:id", "PUT /maintenance",
-          "GET /metric", "GET /metric/:id", "PUT /metric",
-          "GET /component", "GET /component//:id", "PUT /component"
+          "GET /subscription", "GET /subscription/:id", "PUT /subscription/:id",
+          "GET /incident", "GET /incidents/:id", "PUT /incidents/:id",
+          "GET /maintenance", "GET /maintenance/:id", "PUT /maintenance/:id",
+          "GET /metric", "GET /metric/:id", "PUT /metric/:id",
+          "GET /component", "GET /component/:id", "PUT /component/:id"
        ], "version" => "1.0", "uri" => "https://up.erp.uno" }])) end
 
    # PUT PATHWAY
@@ -114,7 +99,13 @@ defmodule UP.HTTP do
                      encode([%{ "error" => "Authorization",
                                 "text" => "Security admin key doesn't match." }])) end end
 
-   # GET LIST PATHWAY
+   def put3(conn, _, type, _, _) do
+       send_resp(conn, 400,
+           encode([%{ "error" => "Method",
+                      "text" => "Resource :#{type} not found." }]))
+   end
+
+   # GET PATHWAY
 
    def get3(conn, auth, type, _, spec) when type == "account" do
        secAdmin = :application.get_env :up, :security_admin, "1707126861546831000"
@@ -146,6 +137,12 @@ defmodule UP.HTTP do
                    send_resp(conn, 400,
                        encode([%{ "error" => "Authorization",
                                   "text" => "Account key doesn't match." }])) end end
+
+   def get3(conn, _, type, _, _) do
+       send_resp(conn, 400,
+           encode([%{ "error" => "Method",
+                      "text" => "Resource #{type} not found." }]))
+   end
 
    # DELETE PATH WAY
 
