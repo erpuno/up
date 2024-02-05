@@ -53,12 +53,12 @@ defmodule UP.HTTP do
        :io.format 'PUT:/#{type}/#{id}/#{spec}', []
        send_resp(conn, 200, encode([%{"type" => type, "id" => id, "spec" => spec}])) end
 
-   def put3(conn,_,"accounts" = type,id,spec) do
+   def put3(conn,_,"accounts" = type,_,spec) do
        {:ok, body, conn} = Plug.Conn.read_body(conn, [])
        account = UP.Serial.toRecord(:account, Jason.decode!(body))
+       id = UP.account(account, :id)
        :io.format 'PUT:/#{type}/#{id}/#{spec} ~p~n', [account]
        :kvs.append account, "/accounts/"
-       id = UP.account(account, :id)
        send_resp(conn, 200, encode([%{"type" => type, "id" => id, "spec" => spec}])) end
 
    def put3(conn,_,"incidents" = type,id,spec) do
