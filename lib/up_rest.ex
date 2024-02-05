@@ -14,6 +14,7 @@ defmodule UP.HTTP do
       get "/:type"        do get3(conn,auth(conn),type,[],"lst") end
       get "/:type/:id"    do get3(conn,auth(conn),type,id,"get") end
       put "/:type/:id"    do put3(conn,auth(conn),type,id,"put") end
+      delete "/:type/:id" do delete3(conn,auth(conn),type,id,"del") end
 
    def shd([]), do: []
    def shd(x), do: hd(x)
@@ -146,8 +147,10 @@ defmodule UP.HTTP do
 
    # DELETE PATHWAY
 
-   def delete3(conn,_,type,id,spec) do
-       :io.format 'DELETE:/#{type}#{id}/#{spec}', []
-       send_resp(conn, 200, encode(%{"type" => type, "spec" => spec})) end
+   def delete3(conn, _, type, _, _) do
+       send_resp(conn, 400,
+           encode([%{ "error" => "Method",
+                      "text" => "Resource #{type} not found." }]))
+   end
 
 end
