@@ -63,7 +63,7 @@ The schema objects have the following life cycles:
  * For `Incident`: `INVESTIGATING`, `IDENTIFIED`, `MONITORING`, `RESOLVED`.
  * For `Maintenance`: `NOTSTARTEDYET`, `INPROGRESS`, `COMPLETED`.
 
-### Accounts Management
+### Account Management
 
 Accounts could only by created with security admin API key, which can
 be set with `:application.set_env(:up, :security_admin, "secret")`.
@@ -102,7 +102,7 @@ $ curl -H "Auth: secret" -X GET "http://localhost:5010/account" ; echo
 ]
 ```
 
-### Sites Managements
+### Site Managements
 
 ```
 $ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/sites/maxim-0012" ; echo
