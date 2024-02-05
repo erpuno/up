@@ -10,6 +10,9 @@ defmodule UP.HTTP do
       get "/accounts"             do get3(conn,auth(conn),"accounts",[],"lst") end
       get "/accounts/:id"         do get3(conn,auth(conn),"accounts",id,"get") end
       put "/accounts/"            do put3(conn,auth(conn),"accounts",[],"put") end
+      get "/sites"                do get3(conn,auth(conn),"sites",[],"lst") end
+      get "/sites/:id"            do get3(conn,auth(conn),"sites",id,"get") end
+      put "/sites/"               do put3(conn,auth(conn),"sites",[],"put") end
       get "/incidents"            do get3(conn,auth(conn),"incidents",[],"lst") end
       get "/incidents/:id"        do get3(conn,auth(conn),"incidents",id,"get") end
       put "/incidents"            do put3(conn,auth(conn),"incidents",[],"put") end
@@ -103,35 +106,37 @@ defmodule UP.HTTP do
 
    # GET LIST PATHWAY
 
-   def get3(conn,_,"subscriptions" = type,id,spec) do
-       :io.format 'GET:/#{type}/#{id}/#{spec}', []
-       send_resp(conn, 200, encode([%{"type" => type, "id" => id, "spec" => spec}])) end
+   def get3(conn, auth, "accounts" = type, [], spec) do
+       secAdmin = :application.get_env :up, :security_admin, "1707126861546831000"
+       case auth do
+            _ when auth == secAdmin ->
+                   accounts = :lists.map(fn x -> UP.Serial.fromRecord(x) end, :kvs.all("/#{type}/"))
+                   :io.format 'GET:/#{type}/#{spec} LIST ~p', [accounts]
+                   send_resp(conn, 200, encode([%{"type" => type, "spec" => spec, "result" => accounts }]))
+            _ ->   :io.format 'GET:/#{type} AUTH FAILED: ~p~n', [auth]
+                   send_resp(conn, 200,
+                       encode([%{ "error" => "Authorization",
+                                  "text" => "Security admin key doesn't match." }])) end end
 
-   def get3(conn,_,"accounts" = type,[],spec) do
-       accounts = :lists.map(fn x -> UP.Serial.fromRecord(x) end, :kvs.all("/#{type}/"))
-       :io.format 'GET:/#{type}/#{spec} LIST ~p', [accounts]
-       send_resp(conn, 200, encode([%{"type" => type, "spec" => spec, "result" => accounts }])) end
-
-   def get3(conn,_,"accounts" = type,id,spec) do
-       {:ok, account} = :kvs.get "/#{type}/", "#{id}"
-       :io.format 'GET:/#{type}/#{id}/#{spec} GET ~p', [account]
-       send_resp(conn, 200, encode([%{"type" => type, "spec" => spec, "result" => UP.Serial.fromRecord(account) }])) end
-
-   def get3(conn,_,"incidents" = type,id,spec) do
-       :io.format 'GET:/#{type}/#{id}/#{spec}', []
-       send_resp(conn, 200, encode([%{"type" => type, "spec" => spec}])) end
-
-   def get3(conn,_,"maintenance" = type,id,spec) do
-       :io.format 'GET:/#{type}/#{id}/#{spec}', []
-       send_resp(conn, 200, encode([%{"type" => type, "spec" => spec}])) end
-
-   def get3(conn,_,"metrics" = type,id,spec) do
-       :io.format 'GET:/#{type}/#{id}/#{spec}', []
-       send_resp(conn, 200, encode([%{"type" => type, "spec" => spec}])) end
-
-   def get3(conn,_,"components" = type,id,spec) do
-       :io.format 'GET:/#{type}/#{id}/#{spec}', []
-       send_resp(conn, 200, encode([%{"type" => type, "spec" => spec}])) end
+   def get3(conn, auth, type, _, spec) when type == "subscriptions"
+                                         or type == "sites"
+                                         or type == "incidents"
+                                         or type == "components"
+                                         or type == "metrics"
+                                         or type == "maintenance" do
+       case :kvs.get("/keys/", auth) do
+            {:ok,{:ref, x, name}} when x == auth ->
+                res = :lists.map(fn x -> UP.Serial.fromRecord(x) end, :kvs.all("/#{type}/#{name}/"))
+                :io.format 'GET:/#{type}/#{spec} NAME ~p LIST ~p', [name, res]
+                send_resp(conn, 200,
+                    encode([%{ "type" => type,
+                               "spec" => spec,
+                               "result" => res }]))
+            _ -> :io.format 'GET:/#{type} AUTH FAILED: ~p~n', [auth]
+                   send_resp(conn, 200,
+                       encode([%{ "error" => "Authorization",
+                                  "text" => "Account key doesn't match." }]))
+       end end
 
    # DELETE PATH WAY
 

@@ -1,35 +1,38 @@
-# Webhook Integration for Status Monitoring
-
-## Overview
-
-This repository provides a webhook integration for receiving updates related to incidents, maintenances, and component status changes. The integration supports different events associated with a status page.
-
-# UP: Incidents and Maintenance
+## UP: Incidents and Maintenance
 
 [![Hex pm](http://img.shields.io/hexpm/v/up.svg?style=flat&x=1)](https://hex.pm/packages/up)
 
-Minimalistic uptime server in Elixir with HTTP API and WebSocket SPA status page. See <a href="https://up.erp.uno">up.erp.uno</a>.
+Minimalistic uptime server in Elixir with HTTP API and WebSocket SPA status page with proxy to Instatus.
+See <a href="https://up.erp.uno">up.erp.uno</a>. UP supports mupltiple Accounts, multiple Sites per account,
+multiple Components per Site, multiple Incidents per Components, multiple Maintenances per Incident,
+multiple Subscription callback per Account.
+
+Similar produts: Sematext, Hyperping, Cronitor, Atlassian Statuspage,
+Better Uptime, Instatus, Freshstatus, Statuspal, Cachet, Vigil, StatusCast, Statping.
 
 ```elixir
   get "/"
   get "/incidents"
   get "/incidents/:id"
-  put "/incidents"
+  put "/incidents/:id"
+  get "/sites"
+  get "/sites/:id"
+  put "/sites/:id"
   get "/maintenance"
   get "/maintenance/:id"
-  put "/maintenance"
+  put "/maintenance/:id"
   get "/metrics"
   get "/metrics/:id"
-  put "/metrics"
+  put "/metrics/:id"
   get "/components"
-  get "/components/:type/:id"
-  put "/components"
-  get "/groups"
-  get "/groups/:type/:id"
-  put "/groups"
-  get "/users"
-  get "/users/:type/:id"
-  put "/users"
+  get "/components/:id"
+  put "/components/:id"
+  get "/subscriptions"
+  get "/subscriptions/:id"
+  put "/subscriptions/:id"
+  get "/accounts"
+  get "/accounts/:id"
+  put "/accounts/"
 ```
 
 ## Features
@@ -57,6 +60,8 @@ Accounts could only by created with security admin API key, which can
 be set with `:application.set_env(:up, :security_admin, "secret")`.
 Then you can add new accounts.
 
+Create User:
+
 ```
 $ curl -H "Auth: secret" -X PUT "http://localhost:5010/accounts/" -d @priv/account.json -v
 [
@@ -64,6 +69,52 @@ $ curl -H "Auth: secret" -X PUT "http://localhost:5010/accounts/" -d @priv/accou
     "id": "maxim-0012",
     "spec": "put",
     "type": "accounts"
+  }
+]
+```
+
+List Users:
+
+```
+$ curl -H "Auth: secret" -X GET "http://localhost:5010/accounts/" ; echo
+[
+  {
+    "result": [
+      {
+        "id": "maxim-0012",
+        "key": "01707128300216989000",
+        "name": "Maksym Sokhatskyi",
+        "sites": []
+      }
+    ],
+    "spec": "lst",
+    "type": "accounts"
+  }
+]
+```
+
+### Sites Managements
+
+```
+$ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/sites/maxim-0012" ; echo
+[
+  {
+    "result": [],
+    "spec": "get",
+    "type": "sites"
+  }
+]
+```
+
+### Subscription Management
+
+```
+$ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/subscriptions/maxim-0012" ; echo
+[
+  {
+    "result": [],
+    "spec": "get",
+    "type": "subscriptions"
   }
 ]
 ```
