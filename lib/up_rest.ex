@@ -98,7 +98,6 @@ defmodule UP.HTTP do
                                           or type == "component"
                                           or type == "metric"
                                           or type == "maintenance" do
-       :io.format '------ ~p~n',[{auth, type, id, spec}]
        case :kvs.get("/keys", auth) do
             {:ok,{:ref, x, name}} when x == auth and id == name ->
                  {:ok, body, conn} = Plug.Conn.read_body(conn, [])
