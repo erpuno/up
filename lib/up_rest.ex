@@ -22,9 +22,9 @@ defmodule UP.HTTP do
       get "/subscription"        do get3(conn,auth(conn),"subscription",[],"lst") end
       get "/subscription/:id"    do get3(conn,auth(conn),"subscription",id,"get") end
       put "/subscription/:id"    do put3(conn,auth(conn),"subscription",id,"put") end
-      get "/maintenanc"          do get3(conn,auth(conn),"maintenanc",[],"lst") end
-      put "/maintenanc/:id"      do put3(conn,auth(conn),"maintenanc",id,"put") end
-      get "/maintenanc/:id"      do get3(conn,auth(conn),"maintenanc",id,"get") end
+      get "/maintenance"         do get3(conn,auth(conn),"maintenance",[],"lst") end
+      put "/maintenance/:id"     do put3(conn,auth(conn),"maintenance",id,"put") end
+      get "/maintenance/:id"     do get3(conn,auth(conn),"maintenance",id,"get") end
       get "/component"           do get3(conn,auth(conn),"component",[],"lst") end
       get "/component/:id"       do get3(conn,auth(conn),"component",id,"get") end
       put "/component/:id"       do put3(conn,auth(conn),"component",id,"put") end

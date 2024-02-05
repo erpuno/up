@@ -14,8 +14,8 @@
         incidents = [] :: list(#incident{}),
         maintenance = [] :: list(#maintenance{}),
         state = open,
-        date = {2015,1,1},
-        terminationDate = {2015,1,1}
+        date = [],
+        terminationDate = []
        }).
 
 -endif.
