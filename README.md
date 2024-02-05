@@ -10,8 +10,23 @@ multiple Subscription callback per Account.
 Similar produts: Sematext, Hyperping, Cronitor, Atlassian Statuspage,
 Better Uptime, Instatus, Freshstatus, Statuspal, Cachet, Vigil, StatusCast, Statping.
 
+Public Endpoints (Announce):
+
 ```elixir
   get "/"
+```
+
+Security Admin Endpoints:
+
+```elixir
+  get "/accounts"
+  get "/accounts/:id"
+  put "/accounts/"
+```
+
+Account Auth Endpoints:
+
+```elixir
   get "/incidents"
   get "/incidents/:id"
   put "/incidents/:id"
@@ -30,9 +45,6 @@ Better Uptime, Instatus, Freshstatus, Statuspal, Cachet, Vigil, StatusCast, Stat
   get "/subscriptions"
   get "/subscriptions/:id"
   put "/subscriptions/:id"
-  get "/accounts"
-  get "/accounts/:id"
-  put "/accounts/"
 ```
 
 ## Features
