@@ -16,6 +16,6 @@ config :n2o,
     {["ws",  :"..."], [], :n2o_cowboy, []}]}]
 
 config :kvs,
-  dba: :kvs_mnesia,
-  dba_st: :kvs_stream,
-  schema: [:kvs, :kvs_stream]
+  dba: :kvs_rocks,
+  dba_st: :kvs_st,
+  schema: [:kvs, :kvs_stream, UP]

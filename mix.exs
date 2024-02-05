@@ -20,7 +20,7 @@ defmodule UP.Mixfile do
   end
 
   def application do
-    [ extra_applications: [:logger, :plug_cowboy, :jason, :inets],
+    [ extra_applications: [:logger, :plug_cowboy, :jason, :inets, :mnesia, :kvs],
       mod: {UP.Application,[]}
     ]
   end
@@ -28,6 +28,7 @@ defmodule UP.Mixfile do
   def deps do
     [
       {:ex_doc, "~> 0.21", only: :dev},
+      {:rocksdb, "~> 1.6.0"},
       {:nitro, "~> 7.10.0"},
       {:kvs, "~> 10.8.2"},
       {:syn, "2.1.0"},

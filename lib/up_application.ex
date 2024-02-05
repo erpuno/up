@@ -5,6 +5,7 @@ defmodule UP.Application do
   def start(_, _) do
       children = [ { Plug.Cowboy, scheme: :http, plug: UP.HTTP, options: [port: rest()] } ]
       opts = [strategy: :one_for_one, name: App.Supervisor]
+      :kvs.join
       :cowboy.start_clear(:http, [{:port, ws()}], %{env: %{dispatch: Application.get_env(:n2o, :points, [])}})
       :io.format "UP UPTIME/STATUS version 1.0.~n"
       :io.format "1: HTTP API listening at port: #{rest()}.~n"
