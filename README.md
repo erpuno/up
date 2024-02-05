@@ -40,6 +40,7 @@ Better Uptime, Instatus, Freshstatus, Statuspal, Cachet, Vigil, StatusCast, Stat
 * Incidents reporting
 * Maintenance announcing
 * Components management
+* Callback URL Subscriptions
 * Telemetry
 
 ### Setup
