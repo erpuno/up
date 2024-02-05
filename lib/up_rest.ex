@@ -6,6 +6,7 @@ defmodule UP.HTTP do
      plug :match
      plug :dispatch
      plug Plug.Parsers, parsers: [:json], json_decoder: Jason
+
       get "/"             do meta(conn) end
       get "/account"      do get3(conn,auth(conn),"account",[],"lst") end
       get "/account/:id"  do get3(conn,auth(conn),"account",id,"get") end
@@ -13,8 +14,6 @@ defmodule UP.HTTP do
       get "/:type"        do get3(conn,auth(conn),type,[],"lst") end
       get "/:type/:id"    do get3(conn,auth(conn),type,id,"get") end
       put "/:type/:id"    do put3(conn,auth(conn),type,id,"put") end
-    match _ do send_resp(conn, 404, "Please refer to https://up.erp.uno manual " <>
-                                    "for information about endpoints addresses.") end
 
    def shd([]), do: []
    def shd(x), do: hd(x)
@@ -22,7 +21,7 @@ defmodule UP.HTTP do
    def encode(x) do
        case  Jason.encode(x) do
              {:ok, bin} -> bin <> "\n"
-             _ -> "ERROR" <> "\n"
+             _ -> encode([%{ "error" => "format" }])
        end |> Jason.Formatter.pretty_print
    end
 
@@ -144,14 +143,10 @@ defmodule UP.HTTP do
                       "text" => "Resource #{type} not found." }]))
    end
 
-   # DELETE PATH WAY
+   # DELETE PATHWAY
 
    def delete3(conn,_,type,id,spec) do
        :io.format 'DELETE:/#{type}#{id}/#{spec}', []
        send_resp(conn, 200, encode(%{"type" => type, "spec" => spec})) end
-
-   def get1(conn,_,type) do
-       :io.format 'GET:/#{type}', []
-       send_resp(conn, 200, encode([%{"type" => type, "spec" => "list"}])) end
 
 end
