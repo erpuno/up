@@ -54,6 +54,13 @@ Interactive Elixir (1.12.2) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)>
 ```
 
+### Statuses
+
+For `Site`: `UP` | `HASISSUES` | `MAINTENANCE`.
+For `Component`: `OPERATIONAL` | `UNDERMAINTENANCE` | `DEGRADEDPERFORMANCE` | `PARTIALOUTAGE` | `MAJOROUTAGE`.
+For `Incident`: `INVESTIGATING`, `IDENTIFIED`, `MONITORING`, `RESOLVED`.
+For `Maintenance`: `NOTSTARTEDYET`, `INPROGRESS`, `COMPLETED`.
+
 ### Accounts Management
 
 Accounts could only by created with security admin API key, which can
@@ -63,7 +70,7 @@ Then you can add new accounts.
 Create User:
 
 ```
-$ curl -H "Auth: secret" -X PUT "http://localhost:5010/accounts/" -d @priv/account.json -v
+$ curl -H "Auth: secret" -X PUT "http://localhost:5010/account" -d @priv/account.json -v
 [
   {
     "id": "maxim-0012",
@@ -76,7 +83,7 @@ $ curl -H "Auth: secret" -X PUT "http://localhost:5010/accounts/" -d @priv/accou
 List Users:
 
 ```
-$ curl -H "Auth: secret" -X GET "http://localhost:5010/accounts/" ; echo
+$ curl -H "Auth: secret" -X GET "http://localhost:5010/account" ; echo
 [
   {
     "result": [
@@ -119,142 +126,29 @@ $ curl -H "Auth: 01707128300216989000" -X GET "http://localhost:5010/subscriptio
 ]
 ```
 
-## Webhook Formats
+### Maintenance Managements
 
-### Incident Updates
-
-```json
-{
-  "meta": {
-    "unsubscribe": "",
-    "documentation": ""
-  },
-  "page": {
-    "id": "",
-    "status_indicator": "",
-    "status_description": "",
-    "url": ""
-  },
-  "incident": {
-    "backfilled": false,
-    "created_at": "",
-    "impact": "",
-    "name": "",
-    "resolved_at": "",
-    "status": "",
-    "updated_at": "",
-    "id": "",
-    "url": "",
-    "incident_updates": [{
-      "id": "",
-      "incident_id": "",
-      "body": "",
-      "status": "",
-      "created_at": "",
-      "updated_at": ""
-    }]
+```
+$ curl -H "Auth: 01707135870515017000" -X GET "http://localhost:5010/maintenance"
+[
+  {
+    "result": [
+      {
+        "account": "01707135870515049000",
+        "id": "01707136783810045000",
+        "incident": [],
+        "name": "Maksym Sokhatskyi"
+      },
+      {
+        "account": "01707135870515049000",
+        "id": "01707136783833913000",
+        "incident": [],
+        "name": "Maksym Sokhatskyi"
+      }
+    ],
+    "spec": "lst",
+    "type": "maintenance"
   }
-}
+]
 ```
-Maintenance Updates
-```json
-{
-  "meta": {
-    "unsubscribe": "",
-    "documentation": ""
-  },
-  "page": {
-    "id": "",
-    "status_indicator": "",
-    "status_description": "",
-    "url": ""
-  },
-  "maintenance": {
-    "backfilled": false,
-    "created_at": "",
-    "impact": "",
-    "name": "",
-    "resolved_at": "",
-    "status": "",
-    "updated_at": "",
-    "id": "",
-    "url": "",
-    "duration": "",
-    "maintenance_updates": [{
-      "id": "",
-      "maintenance_id": "",
-      "body": "",
-      "status": "",
-      "created_at": "",
-      "updated_at": ""
-    }]
-  }
-}
-```
-
-Component Updates
-```json
-
-{
-  "meta": {
-    "unsubscribe": "",
-    "documentation": ""
-  },
-  "page": {
-    "id": "",
-    "status_indicator": "",
-    "status_description": "",
-    "url": ""
-  },
-  "component_update": {
-    "created_at": "",
-    "new_status": "",
-    "component_id": ""
-  },
-  "component": {
-    "created_at": "",
-    "id": "",
-    "name": "",
-    "status": ""
-  }
-}
-```
-
-### Status Page and Component Statuses
-## Page Statuses:
-
-```
-UP
-HASISSUES
-UNDER MAINTENANCE
-```
-
-# Component Statuses:
-```
-OPERATIONAL
-UNDERMAINTENANCE
-DEGRADEDPERFORMANCE
-PARTIALOUTAGE
-MAJOROUTAGE
-```
-# Incident Statuses:
-```
-INVESTIGATING
-IDENTIFIED
-MONITORING
-RESOLVED
-```
-# Maintenance Statuses:
-```
-NOTSTARTEDYET
-INPROGRESS
-COMPLETED
-```
-Usage
-Subscribe to webhooks using the provided formats.
-Receive updates for incidents, maintenances, and component status changes.
-Use the provided status page and component statuses to monitor and act accordingly.
-
-
-
 
