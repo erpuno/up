@@ -30,12 +30,18 @@ defmodule UP.HTTP do
        :io.format 'UP/$meta', []
        conn |> Plug.Conn.put_resp_content_type("application/json") |>
        send_resp(200, encode([%{ "resourceType" => "UP", "methods" => [
-          "GET /account", "GET /accounts/:id", "PUT /account",
-          "GET /subscription", "GET /subscription/:id", "PUT /subscription/:id",
-          "GET /incident", "GET /incidents/:id", "PUT /incidents/:id",
-          "GET /maintenance", "GET /maintenance/:id", "PUT /maintenance/:id",
-          "GET /metric", "GET /metric/:id", "PUT /metric/:id",
-          "GET /component", "GET /component/:id", "PUT /component/:id"
+          "GET /account/:id",
+          "GET /subscription",
+          "GET /incident",
+          "GET /maintenance",
+          "GET /metric",
+          "GET /component",
+          "GET+PUT /account",
+          "GET+PUT+DELETE /subscription/:id",
+          "GET+PUT+DELETE /incidents/:id",
+          "GET+PUT+DELETE /maintenance/:id",
+          "GET+PUT+DELETE /metric/:id",
+          "GET+PUT+DELETE /component/:id"
        ], "version" => "1.0", "uri" => "https://up.erp.uno" }])) end
 
    # PUT PATHWAY
