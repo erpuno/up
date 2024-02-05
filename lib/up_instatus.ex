@@ -1,6 +1,6 @@
 defmodule UP.Instatus do
   def verify(), do: {:ssl, [{:verify, :verify_none}]}
-  @endpoint (:application.get_env(:mrs, :endpoint, "https://api.instatus.com"))
+  @endpoint (:application.get_env(:mrs, :endpoint, "https://api.instatus.com")) # upstream
   def reduceGet(url, name, pageRequested, count, acc) do
       bearer = :application.get_env(:up, :instatus, '')
       accept = 'application/json'

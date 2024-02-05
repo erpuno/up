@@ -23,11 +23,11 @@ defmodule UP.HTTP do
       get "/subscriptions/:id"    do get3(conn,auth(conn),"subscriptions",id,"get") end
       put "/subscriptions"        do put3(conn,auth(conn),"subscriptions",[],"put") end
       get "/maintenance"          do get3(conn,auth(conn),"maintenance",[],"lst") end
-      put "/maintenance"          do put3(conn,auth(conn),"maintenance",[],"put") end
+      put "/maintenance/:id"      do put3(conn,auth(conn),"maintenance",[],"put") end
       get "/maintenance/:id"      do get3(conn,auth(conn),"maintenance",id,"get") end
       get "/components"           do get3(conn,auth(conn),"components",[],"lst") end
-      get "/components/:type/:id" do get3(conn,auth(conn),"components",id,"get") end
-      put "/components"           do put3(conn,auth(conn),"components",[],"put") end
+      get "/components/:id"       do get3(conn,auth(conn),"components",id,"get") end
+      put "/components/:id"       do put3(conn,auth(conn),"components",[],"put") end
     match _ do send_resp(conn, 404, "Please refer to https://up.erp.uno manual " <>
                                     "for information about endpoints addresses.") end
 
