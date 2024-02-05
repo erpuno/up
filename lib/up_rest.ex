@@ -72,7 +72,7 @@ defmodule UP.HTTP do
                                       "id" => UP.account(account, :id),
                                       "spec" => spec }]))
                    end
-            _ ->   :io.format 'PUT:/#{type} AUTH FAILED: ~p~n', [auth]
+            _ ->   :io.format 'PUT:/#{type} SEC AUTH FAILED: ~p~n', [auth]
                    send_resp(conn, 400,
                        encode([%{ "error" => "Authorization",
                                   "text" => "Security admin key doesn't match." }])) end end
@@ -97,7 +97,7 @@ defmodule UP.HTTP do
                                 "spec" => spec }]))
             _ -> send_resp(conn, 400,
                      encode([%{ "error" => "Authorization",
-                                "text" => "Security admin key doesn't match." }])) end end
+                                "text" => "Account key doesn't match." }])) end end
 
    def put3(conn, _, type, _, _) do
        send_resp(conn, 400,
@@ -114,7 +114,7 @@ defmodule UP.HTTP do
                    accounts = :lists.map(fn x -> UP.Serial.fromRecord(x) end, :kvs.all("/#{type}"))
                    :io.format 'GET:/#{type}/#{spec} LIST ~p', [accounts]
                    send_resp(conn, 200, encode([%{"type" => type, "spec" => spec, "result" => accounts }]))
-            _ ->   :io.format 'GET:/#{type} AUTH FAILED: ~p~n', [auth]
+            _ ->   :io.format 'GET:/#{type} SEC AUTH FAILED: ~p~n', [auth]
                    send_resp(conn, 400,
                        encode([%{ "error" => "Authorization",
                                   "text" => "Security admin key doesn't match." }])) end end
