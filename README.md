@@ -59,7 +59,7 @@ iex(1)>
 The schema objects have the following life cycles:
 
  * For `Site`: `UP` | `HASISSUES` | `MAINTENANCE`.
- * For `Component`: `OPERATIONAL` | `UNDERMAINTENANCE` | `DEGRADEDPERFORMANCE` | `PARTIALOUTAGE` | `MAJOROUTAGE`.
+ * For `Component`: `OPERATIONAL` | `MAINTENANCE` | `PERFORMANCE` | `OUTAGE` | `INACCESSIBLE`.
  * For `Incident`: `INVESTIGATING`, `IDENTIFIED`, `MONITORING`, `RESOLVED`.
  * For `Maintenance`: `NOTSTARTEDYET`, `INPROGRESS`, `COMPLETED`.
 
