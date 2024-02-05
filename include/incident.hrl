@@ -7,8 +7,8 @@
 -record(incident, {
         id = kvs:seq([],[]), next = [], prev = [],
         name = [],
-        component = [] :: [] | #component{},
         account = [] :: [] | #account{},
+        component = [] :: [] | #component{},
         state = open,
         date = {2015,1,1},
         terminationDate = {2015,1,1}

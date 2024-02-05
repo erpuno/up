@@ -5,12 +5,12 @@
 
 -record(subscription, {
         id = kvs:seq([],[]), next = [], prev = [],
-        account = [] :: [] | #account{},
         name = [],
+        account = [] :: [] | #account{},
         endpoint = [],
         state = open,
-        date = {2015,1,1},
-        terminationDate = {2015,1,1}
+        date = [],
+        terminationDate = []
        }).
 
 -endif.

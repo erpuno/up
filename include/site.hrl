@@ -9,8 +9,8 @@
 -record(site, {
         id = kvs:seq([],[]), next = [], prev = [],
         name = [],
-        components = [] :: list(#component{}),
         account = [] :: [] | #account{},
+        components = [] :: list(#component{}),
         incidents = [] :: list(#incident{}),
         maintenance = [] :: list(#maintenance{}),
         state = open,
