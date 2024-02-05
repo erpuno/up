@@ -77,8 +77,8 @@ The schema objects have the following life cycles:
 
  * For `Site`: `UP` | `HASISSUES` | `MAINTENANCE`.
  * For `Component`: `OPERATIONAL` | `MAINTENANCE` | `PERFORMANCE` | `OUTAGE` | `INACCESSIBLE`.
- * For `Incident`: `INVESTIGATING`, `IDENTIFIED`, `MONITORING`, `RESOLVED`.
- * For `Maintenance`: `NOTSTARTEDYET`, `INPROGRESS`, `COMPLETED`.
+ * For `Incident`: `INVESTIGATING` | `IDENTIFIED` | `MONITORING` | `RESOLVED`.
+ * For `Maintenance`: `NOTSTARTEDYET` | `INPROGRESS` | `COMPLETED`.
 
 ### Account Management
 
