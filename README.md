@@ -51,6 +51,22 @@ Interactive Elixir (1.12.2) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)>
 ```
 
+### Accounts Management
+
+Accounts could only by created with security admin API key, which can
+be set with `:application.set_env(:up, :security_admin, "secret")`.
+Then you can add new accounts.
+
+```
+$ curl -H "Auth: secret" -X PUT "http://localhost:5010/accounts/" -d @priv/account.json -v
+[
+  {
+    "id": "maxim-0012",
+    "spec": "put",
+    "type": "accounts"
+  }
+]
+```
 
 ## Webhook Formats
 

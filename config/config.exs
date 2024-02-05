@@ -1,6 +1,7 @@
 import Config
 
 config :up,
+  security_admin: "secret",
   instatus: 'Bearer xxx'
 
 config :n2o,
