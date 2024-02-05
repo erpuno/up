@@ -56,10 +56,12 @@ iex(1)>
 
 ### Statuses
 
-For `Site`: `UP` | `HASISSUES` | `MAINTENANCE`.
-For `Component`: `OPERATIONAL` | `UNDERMAINTENANCE` | `DEGRADEDPERFORMANCE` | `PARTIALOUTAGE` | `MAJOROUTAGE`.
-For `Incident`: `INVESTIGATING`, `IDENTIFIED`, `MONITORING`, `RESOLVED`.
-For `Maintenance`: `NOTSTARTEDYET`, `INPROGRESS`, `COMPLETED`.
+The schema objects have the following life cycles:
+
+ * For `Site`: `UP` | `HASISSUES` | `MAINTENANCE`.
+ * For `Component`: `OPERATIONAL` | `UNDERMAINTENANCE` | `DEGRADEDPERFORMANCE` | `PARTIALOUTAGE` | `MAJOROUTAGE`.
+ * For `Incident`: `INVESTIGATING`, `IDENTIFIED`, `MONITORING`, `RESOLVED`.
+ * For `Maintenance`: `NOTSTARTEDYET`, `INPROGRESS`, `COMPLETED`.
 
 ### Accounts Management
 
