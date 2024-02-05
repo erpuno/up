@@ -1,7 +1,7 @@
 # copy id key from from result of account.sh
 
-export id=01707161812754226949
-export key=01707161812754213150
+export id=01707162568915302633
+export key=01707162568915283933
 
 curl -H "Auth: $key" -X PUT "http://localhost:5010/subscription/$id" -d @priv/subscription.json
 curl -H "Auth: $key" -X GET "http://localhost:5010/subscription"

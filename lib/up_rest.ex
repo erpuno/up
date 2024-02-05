@@ -44,7 +44,7 @@ defmodule UP.HTTP do
        requested_id = UP.account(account, :id)
        key = :nitro.to_binary(:kvs.seq([],[]))
        id = case :kvs.get "/#{type}/", "#{requested_id}" do
-                 {:ok, account} -> :kvs.delete("/keys/", UP.account(account, :key)) ; requested_id
+                 {:ok, account} -> :kvs.delete("/keys", UP.account(account, :key)) ; requested_id
                  {:error, _}    -> :nitro.to_binary(:kvs.seq([],[])) end
        newAccount = account |> UP.account(id: id) |> UP.account(key: key)
        :kvs.append newAccount, "/account/"
