@@ -16,6 +16,11 @@ defmodule UP.Serial do
        account: Map.get(body, "account", []),
        parent: Map.get(body, "parent", []) ) end
 
+   def toRecord(:subscription, body) do UP.subscription(
+       id: Map.get(body, "id", []),
+       name: Map.get(body, "name", []),
+       endpoint: Map.get(body, "endpoint", []) ) end
+
    def toRecord(:incident, body) do UP.incident(
        id: Map.get(body, "id", []),
        name: Map.get(body, "name", []),
@@ -42,6 +47,11 @@ defmodule UP.Serial do
        "name"         => UP.account(o, :name),
        "key"          => UP.account(o, :key),
        "sites"        => :lists.map(fn x -> fromRecord(x) end, UP.account(o, :sites)) } end
+
+   def fromRecord(UP.subscription() = o) do %{
+       "id"           => :nitro.to_binary(UP.subscription(o, :id)),
+       "name"         => UP.subscription(o, :name),
+       "endpoint"     => UP.subscription(o, :endpoint) } end
 
    def fromRecord(UP.site() = o) do %{
        "id"           => :nitro.to_binary(UP.site(o, :id)),
