@@ -1,14 +1,24 @@
-## UP: Incidents and Maintenance
+# UP: Incidents and Maintenance
 
 [![Hex pm](http://img.shields.io/hexpm/v/up.svg?style=flat&x=1)](https://hex.pm/packages/up)
 
 Minimalistic uptime server in Elixir with HTTP API and WebSocket SPA status page with proxy to Instatus.
 See <a href="https://up.erp.uno">up.erp.uno</a>. UP supports mupltiple Accounts, multiple Sites per account,
 multiple Components per Site, multiple Incidents per Components, multiple Maintenances per Incident,
-multiple Subscription callback per Account.
+multiple Subscription callback per Site.
 
 Similar produts: Sematext, Hyperping, Cronitor, Atlassian Statuspage,
 Better Uptime, Instatus, Freshstatus, Statuspal, Cachet, Vigil, StatusCast, Statping.
+
+## Features
+
+* Incidents reporting
+* Maintenance announcing
+* Components management
+* Callback URL Subscriptions
+* Telemetry
+
+## Endpoints
 
 Public Endpoints (Announce):
 
@@ -47,15 +57,7 @@ Account Auth Endpoints:
   put "/subscriptions/:id"
 ```
 
-## Features
-
-* Incidents reporting
-* Maintenance announcing
-* Components management
-* Callback URL Subscriptions
-* Telemetry
-
-### Setup
+## Elixir Setup
 
 ```elixir
 $ mix deps.get
@@ -66,6 +68,8 @@ UP UPTIME/STATUS version 1.0.
 Interactive Elixir (1.12.2) - press Ctrl+C to exit (type h() ENTER for help)
 iex(1)>
 ```
+
+## HTTP API
 
 ### Statuses
 
