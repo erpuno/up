@@ -76,8 +76,8 @@ iex(1)>
 The schema objects have the following life cycles:
 
  * For `Site`: `UP` | `HASISSUES` | `MAINTENANCE`.
- * For `Component`: `OPERATIONAL` | `MAINTENANCE` | `PERFORMANCE` | `OUTAGE` | `INACCESSIBLE`.
- * For `Incident`: `INVESTIGATING` | `IDENTIFIED` | `MONITORING` | `RESOLVED`.
+ * For `Component`: `AUTH_ERR` | `WRITE_ERR` | `READ_ERR` | `EXTERNAL_ERR`.
+ * For `Incident`: `NEW_IDENTIFIED` | `INVESTIGATING_PROCESS` | `CLOSED` | `RESOLVED` | `AWAITING_EXTERNAL`.
  * For `Maintenance`: `NOTSTARTEDYET` | `INPROGRESS` | `COMPLETED`.
 
 ### Account Management
